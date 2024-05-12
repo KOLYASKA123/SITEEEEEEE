@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Регистрация нового пользователя</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        {{ regform.as_p }}
+        <button type="submit" class="save btn btn-default">
+            +1 котёнок :3
+        </button>
+    </div>
+</form>
+{% endblock %}

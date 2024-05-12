@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Django Application</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'content/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'content/site.css' %}" />
+    <script src="{% static 'scripts/modernizr-2.6.2.js' %}"></script>
+    <script src="{% static 'scripts/jquery-1.10.2.js' %}"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/static" class="navbar-brand"><img src="{% static 'content/logo.png' %}" alt="logo" /></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'home' %}">Главная комната</a></li>
+                    <li><a href="{% url 'about' %}">О нас и о вас</a></li>
+                    <li><a href="{% url 'contact' %}">Наши контакты</a></li>
+                    <li><a href="{% url 'links' %}">Полезно посмотреть</a></li>
+                    <li><a href="{% url 'anketa' %}">Обратная связь :3</a></li>
+                    <li><a href="{% url 'blog' %}">Блог</a></li>
+                    {% if user.is_superuser %}
+                    <li><a href="{% url 'newpost' %}">Добавить статью</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'videopost' %}">Видео</a></li>
+                    {% if not user.is_authenticated %}
+                    <li><a href="{% url 'registration' %}">Вкладка для новеньких котят</a></li>
+                    {% endif %}
+                </ul>
+                {% include 'loginpartial.html' %}
+            </div>
+        </div>
+    </div>
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+
+        <ol class="carousel-indicators">
+
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+
+        </ol>
+
+        <div class="carousel-inner" role="listbox">
+
+            <div class="item active">
+
+                <img src="{% static 'content/pic1.jpg'%} " alt="Первый слайд" class="img-responsive" />
+
+                <div class="carousel-caption" role="option">
+
+                    <p>
+
+                        Текст для баннера 1
+
+                        <a class="btn btn-default" href="https://uni.invasion.ru">
+
+                            Читать далее
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="item">
+
+                <img src="{% static 'content/pic2.jpg'%}" alt="Второй слайд" class="img-responsive" />
+
+                <div class="carousel-caption" role="option">
+
+                    <p>
+
+                        Текст для баннера 2
+
+                        <a class="btn btn-default" href="https://ravebybuster.ru">
+
+                            Читать далее
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="item">
+
+                <img src=" {% static 'content/pic3.jpg'%} " alt="Третий слайд" class="img-responsive" />
+
+                <div class="carousel-caption" role="option">
+
+                    <p>
+
+                        Текст для баннера 3
+
+                        <a class="btn btn-default" href="https://cyberxcommunity.ru/clubs/pskov/cyberx-pskov.html">
+
+                            Читать далее
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+
+            <span class="sr-only">Previous</span>
+
+        </a>
+
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+
+            <span class="sr-only">Next</span>
+
+        </a>
+
+    </div>
+
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} - Your Yona Entarteiment</p>
+        </footer>
+    </div>
+
+    <script src="{% static 'scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'scripts/respond.js' %}"></script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

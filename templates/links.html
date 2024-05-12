@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+
+<p>
+    Здесь вы сможете найти ресурсы, чей контент схож с контентом нашего сайта: </br>
+    <a href="https://www.vsemayki.ru" target="_blank">
+        <img src="{% static 'content/logo1.jpg' %}" alt="Logo 1" />
+    </a>
+
+    <a href="https://www.dns-shop.ru/configurator/?utm_medium=organic&utm_source=yandex&utm_referrer=https%3A%2F%2Fyandex.ru%2F" target="_blank">
+        <img src="{% static 'content/logo2.jpg' %}" alt="Logo 1" />
+    </a>
+
+    <a href="https://www.ironbook.ru/constructor/" target="_blank">
+        <img src="{% static 'content/logo3.png' %}" alt="Logo 1" />
+    </a>
+
+</p>
+
+{% endblock %}

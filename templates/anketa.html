@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if form != None %}
+<br>
+<h2>Заполни анкету, пожалуйста :3</h2>
+<br>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <label class="name" for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>
+        <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" {% if form.name.value %}value="{{ form.name.value }}" {% endif %} onFocus="changeBackground(this)" onBlur="restoreBackground(this)">
+        <br><br>
+        <label for="{{ form.city.id_for_label }}">{{ form.city.label }}:</label>
+        <input type="text" name="{{ form.city.name }}" id="{{ form.city.id_for_label }}" {% if form.city.value %}value="{{ form.city.value }}" {% endif %} onFocus="changeBackground(this)" onBlur="restoreBackground(this)"><br><br>
+        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}:</label>
+        {{ form.gender }}
+        <label for="{{ form.job.id_for_label }}">{{ form.job.label }}:</label><br>
+        <input type="text" name="{{ form.job.name }}" id="{{ form.job.id_for_label }}" {% if form.job.value %}value="{{ form.job.value }}" {% endif %} onFocus="changeBackground(this)" onBlur="restoreBackground(this)"><br><br>
+        <label for="{{ form.internet.id_for_label }}">{{ form.internet.label }}:</label><br>
+        {{ form.internet }} <br><br>
+        <label for="{{ form.notice.id_for_label }}">{{ form.notice.label }}:</label>
+        <input type="checkbox" name="{{ form.notice.name }}" id="{{ form.notice.id_for_label }}" {% if form.notice.checked %}checked{% endif %} onFocus="changeBackground(this)" onBlur="restoreBackground(this)"><br><br>
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" {% if form.email.value %}value="{{ form.email.value }}" {% endif %} onFocus="changeBackground(this)" onBlur="restoreBackground(this)"><br><br>
+        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}:</label>
+        <textarea name="{{ form.message.name }}" id="{{ form.message.id_for_label }}" onFocus="changeBackground(this)" onBlur="restoreBackground(this)">{% if form.message.value %}{{ form.message.value }}{% endif %}</textarea><br><br>
+        <input type="submit" value="Отправить" id="submitButton1">
+        <script>
+            document.getElementById("submitButton1").addEventListener("mouseover", function () { this.style.backgroundColor = "pink"; });
+            document.getElementById("submitButton1").addEventListener("mouseout", function () { this.style.color = ""; });
+            document.getElementById("submitButton1").addEventListener("mouseout", function () { this.style.backgroundColor = ""; });
+        </script>
+        <script>
+            function changeBackground(element) {
+                element.style.backgroundColor = "pink";
+            } function restoreBackground(element) {
+                element.style.backgroundColor = "";
+            }
+        </script>
+    </form>
+</div>
+{% else %}
+<br>
+<h2>Благодарим за уделённое нам время!</h2>
+<h3>Вы поделились с нами следующим:</h3>
+<ul>
+    <li><span>Имя:</span> {{ data.name }}</li>
+    <li><span>Город:</span> {{ data.city }}</li>
+    <li><span>Пол:</span> {{ data.gender }}</li>
+    <li><span>Род деятельности:</span> {{ data.job }}</li>
+    <li><span>В интернете:</span> {{ data.internet }}</li>
+    <li><span>Получать новости сайта по e-mail:</span> {{ data.notice }}</li>
+    <li><span>Ваш e-mail:</span> {{ data.email }}</li>
+    <li><span>Информация о себе:</span> {{ data.message }}</li>
+</ul>
+{% endif %}
+{% endblock %}
